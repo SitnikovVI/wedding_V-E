@@ -1145,7 +1145,7 @@ section {
     .time-block {
         min-width: 30px;
         /* Значительно уменьшаем блоки */
-        padding: 8px 5px;
+        /*padding: 8px 5px;*/
     }
 
     .time-number {
@@ -1376,5 +1376,6 @@ section {
     }
 
 }
+
 
 
