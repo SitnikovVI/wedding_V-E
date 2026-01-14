@@ -1,0 +1,1376 @@
+/* =========================== */
+/* БАЗОВЫЕ НАСТРОЙКИ И ШРИФТЫ */
+/* =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Passions Conflict';
+    src: url('fonts/PassionsConflictRUS-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat Thin';
+    src: url('fonts/montserrat-thin-2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat Thin Italic';
+    src: url('fonts/Montserrat-Regular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: rgb(245, 236, 221);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 20px 0;
+}
+
+/* =========================== */
+/* ЗАСТАВКА С КОНВЕРТОМ */
+/* =========================== */
+.envelope-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    overflow: hidden;
+}
+
+.envelope-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(120, 124, 89);
+    z-index: 1;
+    transition: opacity 4s ease;
+}
+
+.triangle-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    background: url('images/triangle-top.png') center/contain no-repeat;
+    transition: transform 10s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 3;
+}
+
+.triangle-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    background: url('images/triangle-bottom.png') center/contain no-repeat;
+    transition: transform 10s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 3;
+}
+
+.stamp {
+    position: relative;
+    z-index: 4;
+    cursor: pointer;
+    width: 250px;
+    height: 250px;
+    background: url('images/stamp.png') center/contain no-repeat;
+    margin: 20px 0;
+    transition: all 0.5s ease;
+    animation: stampPulse 3s infinite ease-in-out;
+}
+
+@keyframes stampPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+.envelope-open .envelope-bg {
+    opacity: 0;
+}
+
+.envelope-open .triangle-top {
+    transform: translateY(-100%);
+}
+
+.envelope-open .triangle-bottom {
+    transform: translateY(100%);
+}
+
+.envelope-open .stamp {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.envelope-open {
+    pointer-events: none;
+}
+
+.main-content {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================== */
+/* ГЛАВНЫЙ БАННЕР С ТАЙМЕРОМ */
+/* =========================== */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+        url('images/hero-bg.jpg') center/cover no-repeat;
+    min-height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero-title {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 7.5rem;
+    margin: 10px;
+    line-height: 1;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.hero-date {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    margin-top: 20px;
+    line-height: 1;
+}
+
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: white;
+    animation: bounce 2s infinite;
+    cursor: pointer;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+.countdown-container {
+    margin: 40px 0 30px;
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.countdown-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.time-block:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.time-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    line-height: 1;
+    margin-bottom: 5px;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.time-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* =========================== */
+/* ПРИВЕТСТВЕННАЯ СЕКЦИЯ */
+/* =========================== */
+.welcome-section {
+    text-align: center;
+    background-color: rgb(245, 236, 221);
+    margin-bottom: 5px;
+    padding: 20px 0 10px 0;
+}
+
+.welcome-text {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0px auto;
+    color: #421e0b;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.welcome-text--passions {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 7rem;
+    text-align: center;
+    line-height: 0.85;
+    margin-bottom: 20px;
+}
+
+.welcome-text--montserrat {
+    font-family: 'Montserrat Thin Italic', sans-serif;
+    font-weight: 100;
+    text-align: center;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.calendar-container {
+    text-align: center;
+    margin: 40px 0 20px;
+    padding: 0px;
+}
+
+.calendar-image {
+    max-width: 700px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* =========================== */
+/* ТАЙМЛАЙН С АНИМАЦИЕЙ СЕРДЦА */
+/* =========================== */
+.schedule-section {
+    position: relative;
+    min-height: 1500px;
+    background-color: rgb(245, 236, 221);
+    overflow: visible !important;
+}
+
+.timeline-viewport {
+    position: relative;
+    width: 100%;
+    height: 1378px;
+    margin: 80px 0;
+    overflow: hidden;
+}
+
+.timeline-line-img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    max-width: 90%;
+    height: 1378px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 1;
+}
+
+.line-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.motion-path {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 1378px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.heart-fixed {
+    position: fixed !important;
+    width: 60px !important;
+    height: 60px !important;
+    z-index: 1000 !important;
+    pointer-events: none !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 1 !important;
+    transition: opacity 0.3s ease !important;
+    will-change: left, top !important;
+}
+
+.heart-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: heartbeat 1.5s infinite ease-in-out;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.timeline-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.timeline-item {
+    position: absolute;
+    width: 45%;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: auto;
+}
+
+.timeline-item.active {
+    opacity: 1 !important;
+    transform: scale(1.05) !important;
+}
+
+.timeline-item.left {
+    left: 5%;
+    text-align: right;
+}
+
+.timeline-item.right {
+    right: 5%;
+    text-align: left;
+}
+
+/* Позиции текста на линии - настройте эти значения для корректировки */
+.timeline-item[data-index="0"] {
+    top: 12%;
+}
+
+/* Welcome */
+.timeline-item[data-index="1"] {
+    top: 29%;
+}
+
+/* Церемония */
+.timeline-item[data-index="2"] {
+    top: 46%;
+}
+
+/* Банкет */
+.timeline-item[data-index="3"] {
+    top: 65%;
+}
+
+/* Торт */
+.timeline-item[data-index="4"] {
+    top: 83%;
+}
+
+/* Финал */
+
+.timeline-text {
+    margin-bottom: 10px;
+}
+
+.timeline-label {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 3.5rem;
+    color: #421e0b;
+    display: block;
+    line-height: 1;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.timeline-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #421e0b;
+    display: block;
+    margin-top: 5px;
+}
+
+.timeline-item.active .timeline-label {
+    color: #ff3366 !important;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.5) !important;
+}
+
+.timeline-item.active .timeline-time {
+    color: #ff3366 !important;
+}
+
+/* =========================== */
+/* МЕСТО ПРОВЕДЕНИЯ */
+/* =========================== */
+.location-section {
+    background-color: rgb(245, 236, 221);
+    padding: 0 0;
+    text-align: center;
+}
+
+.location-title {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 5rem;
+    color: #421e0b;
+    margin-bottom: 5px;
+    line-height: 1;
+    text-align: center;
+}
+
+.location-name {
+    font-family: 'Montserrat Thin Italic', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: #421e0b;
+    margin-bottom: 1px;
+    line-height: 1;
+}
+
+.location-address {
+    font-family: 'Montserrat Thin Italic', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: #421e0b;
+    line-height: 1.2;
+}
+
+.address-line {
+    display: block;
+    margin-bottom: 1px;
+}
+
+:root {
+    --pulse-color: #767b56;
+    --pulse-text-color: #432c1b;
+    --pulse-size: 150px;
+    --pulse-duration: 3s;
+    --pulse-scale: 1.5;
+    --pulse-start-opacity: 0.8;
+    --pulse-mid-opacity: 0.4;
+    --pulse-end-opacity: 0;
+}
+
+.pulse-button-container {
+    text-align: center;
+    margin: 40px auto 20px;
+    padding: 20px;
+}
+
+.pulse-button {
+    display: inline-block;
+    position: relative;
+    width: var(--pulse-size);
+    height: var(--pulse-size);
+    border-radius: 50%;
+    background-color: var(--pulse-color);
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(118, 123, 86, 0.3);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Montserrat Thin', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--pulse-text-color);
+    width: 80%;
+    line-height: 1.3;
+    text-align: center;
+    z-index: 2;
+}
+
+.pulse-button::before,
+.pulse-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--pulse-color);
+    opacity: 0;
+    z-index: -1;
+    animation: pulseWave var(--pulse-duration) linear infinite;
+}
+
+.pulse-button::after {
+    animation-delay: calc(var(--pulse-duration) / 2);
+}
+
+@keyframes pulseWave {
+    0% {
+        transform: scale(1);
+        opacity: var(--pulse-start-opacity);
+    }
+
+    50% {
+        opacity: var(--pulse-mid-opacity);
+    }
+
+    100% {
+        transform: scale(var(--pulse-scale));
+        opacity: var(--pulse-end-opacity);
+    }
+}
+
+.pulse-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(118, 123, 86, 0.4);
+}
+
+.pulse-button:active {
+    transform: scale(0.98);
+}
+
+.location-photo-container {
+    text-align: center;
+    margin: 30px auto 40px;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.location-photo {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+/* =========================== */
+/* ДРЕСС-КОД */
+/* =========================== */
+.dresscode-section {
+    background-color: rgb(245, 236, 221);
+    padding: 0px 0;
+    text-align: center;
+}
+
+.dresscode-title {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 5rem;
+    color: #421e0b;
+    margin-bottom: 5px;
+    line-height: 1;
+    text-align: center;
+}
+
+.dresscode-text {
+    font-family: 'Montserrat Thin Italic', sans-serif;
+    font-weight: 300;
+    font-size: 1.3rem;
+    color: #421e0b;
+    margin-bottom: 1px;
+    line-height: 1;
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.color-square {
+    width: 45px;
+    height: 45px;
+    background-color: #767b56;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.location-photo-container-details {
+    text-align: center;
+    margin: 70px auto 40px;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.details-photo-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+}
+
+.location-photo-details {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    display: block;
+    margin: 0 auto;
+}
+
+.details-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.Details-title {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 7rem;
+    margin: 0 0 20px 0;
+    font-weight: normal;
+    line-height: 1;
+    color: white;
+}
+
+.Details-line {
+    font-family: 'Montserrat Thin Italic', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin: 10px 0;
+    line-height: 1.4;
+    color: white;
+    max-width: 90%;
+}
+
+/* =========================== */
+/* АНКЕТА GOOGLE FORMS */
+/* =========================== */
+.rsvp-section {
+    background-color: rgb(245, 236, 221);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.google-forms-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.forms-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    background: rgb(245, 236, 221);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(66, 30, 11, 0.1);
+    border: 1px solid rgba(66, 30, 11, 0.1);
+}
+
+.google-forms-iframe {
+    display: block;
+    border: none;
+    min-height: 1350px;
+    width: 100%;
+    background: transparent;
+}
+
+.google-forms-iframe::before {
+    content: "Загрузка анкеты...";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 236, 221, 0.9);
+    font-family: 'Montserrat', sans-serif;
+    color: #421e0b;
+    font-size: 1.2rem;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.google-forms-iframe.loaded::before {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* =========================== */
+/* ФИНАЛЬНАЯ СЕКЦИЯ */
+/* =========================== */
+.Goodbye-section {
+    padding: 60px 0;
+    text-align: center;
+    background-color: rgb(245, 236, 221);
+    margin-top: -50px;
+}
+
+.goodbye-photo-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 20px 20px 20px;
+}
+
+.goodbye-photo-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.goodbye-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.goodbye-text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.goodbye-title {
+    font-family: 'Passions Conflict', cursive;
+    font-size: 5rem;
+    margin: 0;
+    font-weight: normal;
+    line-height: 1;
+    color: white;
+}
+
+/* =========================== */
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+/* =========================== */
+
+/* ПЛАНШЕТЫ (768px и меньше) */
+@media (max-width: 768px) {
+
+    /* Заставка */
+    .stamp {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero {
+        min-height: 10vh;
+    }
+
+    /* Главный баннер */
+    .hero-title {
+        font-size: 4.5rem;
+        /* Уменьшаем заголовок */
+    }
+
+    .hero-date {
+        font-size: 2.8rem;
+        /* Уменьшаем дату */
+    }
+
+    .countdown-container {
+        padding: 20px 15px;
+        margin: 30px 15px;
+    }
+
+    .time-block {
+        min-width: 80px;
+        /* Уменьшаем блоки таймера */
+        padding: 12px 8px;
+    }
+
+    .time-number {
+        font-size: 2.8rem;
+        /* Уменьшаем цифры */
+        min-height: 45px;
+    }
+
+    .time-label {
+        font-size: 0.9rem;
+        /* Уменьшаем текст под цифрами */
+    }
+
+    .countdown-timer {
+        gap: 15px;
+        /* Уменьшаем расстояние между блоками */
+    }
+
+    /* Приветственная секция */
+    .welcome-text--passions {
+        font-size: 3.5rem;
+        /* Уменьшаем "Дорогие гости" */
+        line-height: 0.8;
+        margin-bottom: 5px;
+    }
+
+    /* Таймлайн с анимацией сердца */
+    .timeline-viewport {
+        height: 1000px;
+        /* Уменьшаем высоту контейнера */
+        margin: 50px 0;
+    }
+
+    .timeline-item {
+        width: 40%;
+        /* Уменьшаем ширину текстовых блоков */
+        padding: 15px;
+    }
+
+    .timeline-label {
+        font-size: 2.2rem;
+        /* Уменьшаем названия событий */
+    }
+
+    .timeline-time {
+        font-size: 1.3rem;
+        /* Уменьшаем время */
+    }
+
+    /* Настройте эти значения для корректировки позиций текста на линии */
+    .timeline-item[data-index="0"] {
+        top: 11%;
+    }
+
+    /* Welcome */
+    .timeline-item[data-index="1"] {
+        top: 28%;
+    }
+
+    /* Церемония */
+    .timeline-item[data-index="2"] {
+        top: 45%;
+    }
+
+    /* Банкет */
+    .timeline-item[data-index="3"] {
+        top: 64%;
+    }
+
+    /* Торт */
+    .timeline-item[data-index="4"] {
+        top: 82%;
+    }
+
+    /* Финал */
+
+    .heart-fixed {
+        width: 50px !important;
+        /* Уменьшаем сердце */
+        height: 50px !important;
+    }
+
+    /* Место проведения */
+    .location-title {
+        font-size: 3.2rem;
+        /* Уменьшаем "Место проведения" */
+    }
+
+    .location-name {
+        font-size: 2.2rem;
+        /* Уменьшаем "База отдыха" */
+    }
+
+    .location-address {
+        font-size: 1.1rem;
+        /* Уменьшаем адрес */
+    }
+
+    .location-photo-container {
+        margin: 25px auto 35px;
+        padding: 0 15px;
+    }
+
+    :root {
+        --pulse-size: 130px;
+        /* Уменьшаем кнопку "Построить маршрут" */
+        --pulse-scale: 1.6;
+    }
+
+    .button-text {
+        font-size: 1rem;
+        /* Уменьшаем текст в кнопке */
+    }
+
+    /* Дресс-код */
+    .dresscode-title {
+        font-size: 3.2rem;
+        /* Уменьшаем "Дресс-код" */
+    }
+
+    .dresscode-text {
+        font-size: 1.2rem;
+        /* Уменьшаем текст дресс-кода */
+        max-width: 500px;
+        padding: 0 20px;
+    }
+
+    .color-square {
+        width: 50px;
+        /* Уменьшаем квадраты палитры */
+        height: 50px;
+    }
+
+    .color-palette {
+        gap: 15px;
+        /* Уменьшаем расстояние между квадратами */
+    }
+
+    .Details-title {
+        font-size: 4rem;
+        /* Уменьшаем "Details" */
+        margin-bottom: 15px;
+    }
+
+    .Details-line {
+        font-size: 1.1rem;
+        /* Уменьшаем текст в Details */
+        letter-spacing: 0.8px;
+    }
+
+    .details-text-overlay {
+        padding: 20px;
+        /* Уменьшаем отступы текста */
+    }
+
+    /* Анкета Google Forms */
+    .google-forms-container {
+        padding: 0 15px;
+    }
+
+    .forms-iframe-wrapper {
+        border-radius: 10px;
+    }
+
+    .google-forms-iframe {
+        min-height: 800px;
+        /* Увеличиваем высоту формы */
+    }
+
+    /* Финальная секция */
+    .goodbye-title {
+        font-size: 4rem;
+        /* Уменьшаем "До скорой встречи" */
+    }
+}
+
+/* МОБИЛЬНЫЕ ТЕЛЕФОНЫ (480px и меньше) */
+@media (max-width: 480px) {
+
+    /* Заставка */
+    .stamp {
+        width: 180px;
+        height: 180px;
+    }
+
+    /* треугольник верхний */
+    .triangle-top {
+        width: 200%;
+        height: 50vh;
+        left: -200px;
+    }
+
+    /* треугольник нижний */
+    .triangle-bottom {
+        width: 200%;
+        height: 50vh;
+        left: -200px;
+    }
+
+    .hero {
+        min-height: 10vh;
+    }
+
+    /* Главный баннер */
+    .hero-title {
+        font-size: 3.8rem;
+        /* Уменьшаем заголовок для телефонов */
+        line-height: 1;
+
+    }
+
+    .welcome-text--passions {
+        /* Отступ после дорогие гости */
+        padding: 0 0 20px;
+    }
+
+    .hero-date {
+        font-size: 2.2rem;
+        /* Уменьшаем дату для телефонов */
+        letter-spacing: 2px;
+    }
+
+    .countdown-container {
+        max-width: 95%;
+        /* Уменьшаем ширину контейнера */
+    }
+
+    .countdown-timer {
+        gap: 8px;
+        /* Уменьшаем расстояние между блоками таймера */
+        justify-content: space-around;
+        /* Равномерно распределяем блоки */
+    }
+
+    .time-block {
+        min-width: 60px;
+        /* Значительно уменьшаем блоки */
+        padding: 8px 5px;
+    }
+
+    .time-number {
+        font-size: 2rem;
+        /* Уменьшаем цифры */
+        min-height: 35px;
+    }
+
+    .time-label {
+        font-size: 0.7rem;
+        /* Уменьшаем текст под цифрами */
+    }
+
+    .countdown-text {
+        font-size: 1.1rem;
+        /* Уменьшаем текст над таймером */
+    }
+
+    /* Приветственная секция */
+    .welcome-text--passions {
+        font-size: 4rem;
+        /* Делаем размер как "Место проведения" */
+        line-height: 0.7;
+        margin-bottom: 0;
+    }
+
+    .line-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .schedule-section {
+
+        min-height: 10px;
+
+    }
+
+    /* Таймлайн с анимацией сердца */
+    .timeline-viewport {
+
+        height: 800px;
+        /* Уменьшаем высоту контейнера */
+    }
+
+    .timeline-line-img {
+        height: 800px;
+        /* Еще больше уменьшаем высоту видимой линии */
+    }
+
+    .motion-path {
+        height: 800px;
+        width: auto;
+        /* Еще больше уменьшаем высоту пути для сердца */
+    }
+
+    .timeline-item {
+        width: 38%;
+        /* Уменьшаем ширину текстовых блоков */
+        padding: 10px;
+    }
+
+    .timeline-label {
+        font-size: 2.5rem;
+        /* Уменьшаем названия событий */
+    }
+
+    .timeline-time {
+        font-size: 1.7rem;
+        /* Уменьшаем время */
+    }
+
+    /* Настройте эти значения для корректировки позиций текста на линии */
+    .timeline-item[data-index="0"] {
+        top: 5%;
+    }
+
+    /* Welcome */
+    .timeline-item[data-index="1"] {
+        top: 27%;
+    }
+
+    /* Церемония */
+    .timeline-item[data-index="2"] {
+        top: 44%;
+    }
+
+    /* Банкет */
+    .timeline-item[data-index="3"] {
+        top: 63%;
+    }
+
+    /* Торт */
+    .timeline-item[data-index="4"] {
+        top: 81%;
+    }
+
+    /* Финал */
+
+    .heart-fixed {
+        width: 40px !important;
+        /* Уменьшаем сердце */
+        height: 40px !important;
+    }
+
+    /* Место проведения */
+    .location-title {
+        font-size: 4rem;
+        /* Размер как "Дорогие гости" */
+    }
+
+    .location-name {
+        font-size: 1.8rem;
+        /* Уменьшаем "База отдыха" */
+    }
+
+    .location-address {
+        font-size: 1rem;
+        /* Уменьшаем адрес */
+    }
+
+    .location-photo-container {
+        margin: 20px auto 30px;
+        padding: 0 10px;
+    }
+
+    :root {
+        --pulse-size: 100px;
+        /* Значительно уменьшаем кнопку "Построить маршрут" */
+        --pulse-scale: 1.8;
+    }
+
+    .button-text {
+        font-size: 0.9rem;
+        /* Уменьшаем текст в кнопке */
+    }
+
+    /* Дресс-код */
+    .dresscode-title {
+        font-size: 4rem;
+        /* Размер как "Дорогие гости" */
+    }
+
+    .dresscode-text {
+        font-size: 1.1rem;
+        /* Уменьшаем текст дресс-кода */
+        margin-bottom: 30px;
+    }
+
+    .color-square {
+        width: 40px;
+        /* Уменьшаем квадраты палитры */
+        height: 40px;
+    }
+
+    .color-palette {
+        gap: 10px;
+        /* Уменьшаем расстояние между квадратами */
+        margin-top: 30px;
+    }
+
+    .Details-title {
+        font-size: 4rem;
+        /* Размер как "Дорогие гости" */
+        margin-bottom: 10px;
+    }
+
+    .Details-line {
+        font-size: 0.9rem;
+        /* Уменьшаем текст в Details */
+        letter-spacing: 0.5px;
+        max-width: 95%;
+    }
+
+    .details-text-overlay {
+        padding: 15px;
+        /* Уменьшаем отступы текста */
+    }
+
+    /* Анкета Google Forms */
+    .google-forms-iframe {
+        min-height: 1600px;
+        /* Увеличиваем высоту формы для телефонов */
+    }
+
+    /* Финальная секция */
+    .goodbye-title {
+        font-size: 3rem;
+        /* Уменьшаем "До скорой встречи" */
+    }
+}
+
+/* ОЧЕНЬ МАЛЕНЬКИЕ ТЕЛЕФОНЫ (360px и меньше) */
+@media (max-width: 360px) {
+    .color-palette {
+        gap: 8px;
+        /* Еще меньше расстояние между квадратами */
+    }
+
+    .color-square {
+        width: 35px;
+        /* Еще меньше квадраты палитры */
+        height: 35px;
+    }
+
+    .location-photo {
+        height: 250px;
+        /* Уменьшаем высоту фото */
+    }
+
+    /* Таймер - дополнительные корректировки для очень маленьких экранов */
+    .countdown-timer {
+        gap: 5px;
+    }
+
+    .time-block {
+        min-width: 55px;
+        padding: 6px 4px;
+    }
+
+    .time-number {
+        font-size: 1.8rem;
+        min-height: 30px;
+    }
+
+    .time-label {
+        font-size: 0.65rem;
+    }
+}
