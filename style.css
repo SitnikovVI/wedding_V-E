@@ -1143,19 +1143,19 @@ section {
     }
 
     .time-block {
-        min-width: 60px;
+        min-width: 30px;
         /* Значительно уменьшаем блоки */
         padding: 8px 5px;
     }
 
     .time-number {
-        font-size: 2rem;
+        font-size: 1.5rem;
         /* Уменьшаем цифры */
         min-height: 35px;
     }
 
     .time-label {
-        font-size: 0.7rem;
+        font-size: 0.5rem;
         /* Уменьшаем текст под цифрами */
     }
 
@@ -1376,4 +1376,5 @@ section {
     }
 
 }
+
 
