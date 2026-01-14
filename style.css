@@ -1096,14 +1096,14 @@ section {
     .triangle-top {
         width: 200%;
         height: 50vh;
-        left: -200px;
+        left: auto;
     }
 
     /* треугольник нижний */
     .triangle-bottom {
         width: 200%;
         height: 50vh;
-        left: -200px;
+        left: auto;
     }
 
     .hero {
@@ -1373,4 +1373,5 @@ section {
     .time-label {
         font-size: 0.65rem;
     }
+
 }
