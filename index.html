@@ -21,6 +21,11 @@
         <div class="triangle-bottom"></div>
     </div>
 
+    <audio id="weddingMusic" loop>
+        <source src="audio/wedding-music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
     <!-- Основной контент -->
     <div class="main-content" id="mainContent">
         <!-- Герой с фотографией -->
@@ -52,10 +57,16 @@
                     </div>
                 </div>
 
-                <div class="scroll-hint">
-                    <i class="fas fa-chevron-down"></i>
+
+
+                <div class="music-control-container">
+                    <div class="music-control" id="musicControl">
+                        <i class="fas fa-pause" id="musicIcon"></i>
+                    </div>
                 </div>
             </div>
+
+
         </section>
 
         <!-- Приветственная секция -->
@@ -93,35 +104,35 @@
                         <div class="timeline-item left" data-index="0">
                             <div class="timeline-text">
                                 <span class="timeline-label">Welcome</span>
-                                <span class="timeline-time">16:00</span>
+                                <span class="timeline-time">14:00</span>
                             </div>
                         </div>
 
                         <div class="timeline-item right" data-index="1">
                             <div class="timeline-text">
                                 <span class="timeline-label">Церемония</span>
-                                <span class="timeline-time">17:00</span>
+                                <span class="timeline-time">15:00</span>
                             </div>
                         </div>
 
                         <div class="timeline-item left" data-index="2">
                             <div class="timeline-text">
                                 <span class="timeline-label">Банкет</span>
-                                <span class="timeline-time">18:30</span>
+                                <span class="timeline-time">16:00</span>
                             </div>
                         </div>
 
                         <div class="timeline-item right" data-index="3">
                             <div class="timeline-text">
                                 <span class="timeline-label">Торт</span>
-                                <span class="timeline-time">22:00</span>
+                                <span class="timeline-time">20:00</span>
                             </div>
                         </div>
 
                         <div class="timeline-item left" data-index="4">
                             <div class="timeline-text">
                                 <span class="timeline-label">Финал</span>
-                                <span class="timeline-time">23:00</span>
+                                <span class="timeline-time">22:00</span>
                             </div>
                         </div>
                     </div>
@@ -142,6 +153,11 @@
                 </div>
             </div>
 
+            <div class="location-photo-container">
+                <img src="images/Otrada.jpg" data-src="images/Otrada.jpg" alt="База отдыха 'Отрада'"
+                    class="location-photo lazy-load">
+            </div>
+
             <div class="pulse-button-container">
                 <a href="https://yandex.ru/maps/?from=api-maps&ll=44.413323%2C54.325966&mode=poi&origin=jsapi_2_1_79&poi%5Bpoint%5D=44.411758%2C54.325970&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D157040847695&utm_source=jsapi&z=16"
                     class="pulse-button" target="_blank" rel="noopener noreferrer">
@@ -149,10 +165,6 @@
                 </a>
             </div>
 
-            <div class="location-photo-container">
-                <img src="images/Otrada.jpg" data-src="images/Otrada.jpg" alt="База отдыха 'Отрада'"
-                    class="location-photo lazy-load">
-            </div>
         </section>
 
         <!-- Дресс-код -->
@@ -192,7 +204,7 @@
                     <div class="forms-iframe-wrapper">
                         <iframe
                             src="https://docs.google.com/forms/d/e/1FAIpQLSfQUizTnvLwsPVJnjISlxyfnVXKMPctF_MWjgOooiFWzq0Jgw/viewform?embedded=true&"
-                            width="640" height="1213" frameborder="0" marginheight="0" marginwidth="0"
+                            width="640" height="1000" frameborder="0" marginheight="0" marginwidth="0"
                             title="Анкета гостя" loading="lazy" class="google-forms-iframe">
                             Загрузка...
                         </iframe>
