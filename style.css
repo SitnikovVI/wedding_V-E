@@ -285,6 +285,70 @@ section {
 }
 
 /* =========================== */
+/* КНОПКА УПРАВЛЕНИЯ МУЗЫКОЙ */
+/* =========================== */
+.music-control-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    /* Отступ от таймера */
+    position: relative;
+}
+
+.music-control {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.music-control:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.music-control i {
+    font-size: 1.8rem;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.music-control.playing i {
+    animation: pulseIcon 2s infinite;
+}
+
+@keyframes pulseIcon {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Состояние паузы (показываем иконку play) */
+.music-control.paused i {
+    animation: none;
+}
+
+
+
+/* =========================== */
 /* ПРИВЕТСТВЕННАЯ СЕКЦИЯ */
 /* =========================== */
 .welcome-section {
@@ -767,7 +831,7 @@ section {
 }
 
 .google-forms-container {
-    max-width: 700px;
+    max-width: 650px;
     margin: 0 auto;
     padding: 20px 0;
 }
@@ -775,44 +839,29 @@ section {
 .forms-iframe-wrapper {
     position: relative;
     width: 100%;
-    background: rgb(245, 236, 221);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(66, 30, 11, 0.1);
-    border: 1px solid rgba(66, 30, 11, 0.1);
+    background: transparent;
+    /* Убрали фон контейнера */
+    border-radius: 0;
+    /* Убрали скругление углов */
+    overflow: visible;
+    /* Изменили на visible */
+    box-shadow: none;
+    /* Убрали тень */
+    border: none;
+    /* Убрали рамку */
 }
 
 .google-forms-iframe {
     display: block;
     border: none;
-    min-height: 1350px;
+    min-height: auto;
+    height: 900px;
     width: 100%;
     background: transparent;
 }
 
-.google-forms-iframe::before {
-    content: "Загрузка анкеты...";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(245, 236, 221, 0.9);
-    font-family: 'Montserrat', sans-serif;
-    color: #421e0b;
-    font-size: 1.2rem;
-    z-index: 1;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
 
-.google-forms-iframe.loaded::before {
-    opacity: 0;
-    pointer-events: none;
-}
+
 
 /* =========================== */
 /* ФИНАЛЬНАЯ СЕКЦИЯ */
@@ -920,6 +969,17 @@ section {
         /* Уменьшаем текст под цифрами */
     }
 
+    .music-control {
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .music-control i {
+        font-size: 1.5rem;
+    }
+
     .countdown-timer {
         gap: 15px;
         /* Уменьшаем расстояние между блоками */
@@ -933,60 +993,10 @@ section {
         margin-bottom: 5px;
     }
 
-    /* Таймлайн с анимацией сердца */
-    .timeline-viewport {
-        height: 1000px;
-        /* Уменьшаем высоту контейнера */
-        margin: 50px 0;
-    }
-
     .timeline-item {
         width: 40%;
         /* Уменьшаем ширину текстовых блоков */
         padding: 15px;
-    }
-
-    .timeline-label {
-        font-size: 2.2rem;
-        /* Уменьшаем названия событий */
-    }
-
-    .timeline-time {
-        font-size: 1.3rem;
-        /* Уменьшаем время */
-    }
-
-    /* Настройте эти значения для корректировки позиций текста на линии */
-    .timeline-item[data-index="0"] {
-        top: 11%;
-    }
-
-    /* Welcome */
-    .timeline-item[data-index="1"] {
-        top: 28%;
-    }
-
-    /* Церемония */
-    .timeline-item[data-index="2"] {
-        top: 45%;
-    }
-
-    /* Банкет */
-    .timeline-item[data-index="3"] {
-        top: 64%;
-    }
-
-    /* Торт */
-    .timeline-item[data-index="4"] {
-        top: 82%;
-    }
-
-    /* Финал */
-
-    .heart-fixed {
-        width: 50px !important;
-        /* Уменьшаем сердце */
-        height: 50px !important;
     }
 
     /* Место проведения */
@@ -1030,8 +1040,7 @@ section {
     .dresscode-text {
         font-size: 1.2rem;
         /* Уменьшаем текст дресс-кода */
-        max-width: 500px;
-        padding: 0 20px;
+        margin-bottom: 30px;
     }
 
     .color-square {
@@ -1128,6 +1137,22 @@ section {
         font-size: 2.2rem;
         /* Уменьшаем дату для телефонов */
         letter-spacing: 2px;
+    }
+
+    .music-control-container {
+        margin-top: 10px;
+        /* Отступ от таймера */
+    }
+
+    .music-control {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+
+    .music-control i {
+        font-size: 1.3rem;
     }
 
     .countdown-container {
@@ -1327,7 +1352,8 @@ section {
 
     /* Анкета Google Forms */
     .google-forms-iframe {
-        min-height: 1600px;
+        min-height: 500px;
+        height: 700px;
         /* Увеличиваем высоту формы для телефонов */
     }
 
@@ -1374,8 +1400,4 @@ section {
     .time-label {
         font-size: 0.65rem;
     }
-
 }
-
-
-
