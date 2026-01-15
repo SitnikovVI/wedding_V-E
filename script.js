@@ -181,4 +181,95 @@ document.addEventListener('DOMContentLoaded', function () {
 
         updateHeartPosition();
     });
+
+    // ===========================
+    // УПРАВЛЕНИЕ МУЗЫКОЙ
+    // ===========================
+
+    // Функция для управления музыкой
+    function initMusicPlayer() {
+        const musicPlayer = document.getElementById('weddingMusic');
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+
+        // Проверяем, существуют ли элементы
+        if (!musicPlayer || !musicControl || !musicIcon) {
+            console.warn('Элементы музыкального плеера не найдены');
+            return;
+        }
+
+        musicPlayer.volume = 0.5; // ← ЭТО МЕСТО! 0.7 = 70% громкости
+
+        // Начинаем воспроизведение автоматически при открытии заставки
+        let isPlaying = false;
+
+        // Функция для воспроизведения музыки
+        function playMusic() {
+            musicPlayer.play().then(() => {
+                isPlaying = true;
+                musicControl.classList.add('playing');
+                musicControl.classList.remove('paused');
+                musicIcon.classList.remove('fa-play');
+                musicIcon.classList.add('fa-pause');
+            }).catch(error => {
+                console.log('Автовоспроизведение заблокировано:', error);
+                // Если автовоспроизведение заблокировано, показываем кнопку play
+                isPlaying = false;
+                musicControl.classList.remove('playing');
+                musicControl.classList.add('paused');
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-play');
+            });
+        }
+
+        // Функция для остановки музыки
+        function pauseMusic() {
+            musicPlayer.pause();
+            isPlaying = false;
+            musicControl.classList.remove('playing');
+            musicControl.classList.add('paused');
+            musicIcon.classList.remove('fa-pause');
+            musicIcon.classList.add('fa-play');
+        }
+
+        // Функция для переключения воспроизведения/паузы
+        function toggleMusic() {
+            if (isPlaying) {
+                pauseMusic();
+            } else {
+                playMusic();
+            }
+        }
+
+        // Обработчик клика по кнопке
+        musicControl.addEventListener('click', toggleMusic);
+
+        // Обработчик ошибок воспроизведения
+        musicPlayer.addEventListener('error', function (e) {
+            console.error('Ошибка загрузки аудио:', e);
+            musicControl.style.display = 'none'; // Скрываем кнопку при ошибке
+        });
+
+        // Автоматически запускаем музыку при открытии конверта
+        const stamp = document.getElementById('stamp');
+        if (stamp) {
+            stamp.addEventListener('click', function () {
+                // Ждем немного, чтобы анимация конверта началась
+                setTimeout(playMusic, 500);
+            });
+        }
+
+        // Также можно запускать при загрузке страницы (если конверт уже открыт)
+        window.addEventListener('load', function () {
+            // Проверяем, открыт ли уже конверт
+            const envelopeContainer = document.getElementById('envelopeContainer');
+            if (envelopeContainer && envelopeContainer.classList.contains('envelope-open')) {
+                setTimeout(playMusic, 1000);
+            }
+        });
+    }
+
+    // Инициализируем музыкальный плеер после загрузки DOM
+    document.addEventListener('DOMContentLoaded', initMusicPlayer);
+
 })();
